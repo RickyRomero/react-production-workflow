@@ -10,3 +10,16 @@ before_install:
 
 script:
   - 'docker run -e CI=true -v /usr/app/node_modules -v $(pwd)/frontend:/usr/app rickyromero/react-production-workflow yarn test'
+
+deploy:
+  access_key_id: '$AWS_ACCESS_KEY'
+  secret_access_key:
+    secure: '$AWS_SECRET_KEY'
+  provider: 'elasticbeanstalk'
+  region: 'us-west-2'
+  app: 'react-production-workflow'
+  env: 'ReactProductionWorkflow-env'
+  bucket_name: 'elasticbeanstalk-us-west-2-590446669935'
+  bucket_path: 'react-production-workflow'
+  on:
+    branch: 'master'
