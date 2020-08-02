@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: './frontend'
+      dockerfile: '../Dockerfile.dev'
+    ports:
+      - '3000:3000'
+
+    # `/usr/app/node_modules` is prepared when we run a build.
+    # We actually don't want to install these modules on our local
+    # development system. The `-v /usr/app/node_modules` portion
+    # of the `run` command is a "bookmark" which tells Docker not to
+    # map it against anything else. This protects the modules we
+    # installed earlier when we then set up a mount to ./frontend.
+    volumes:
+      - '/usr/app/node_modules'
+      - './frontend:/usr/app'
+
+    stdin_open: true

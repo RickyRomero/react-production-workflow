@@ -1,0 +1,12 @@
+FROM node:alpine
+
+WORKDIR '/usr/app'
+
+COPY './package.json' './'
+COPY './yarn.lock' './'
+RUN yarn
+
+# Uncomment if you decide to stop using a mount for hot reloading
+# COPY './' './'
+
+CMD ["yarn", "start"]
