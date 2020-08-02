@@ -23,3 +23,6 @@ FROM nginx:alpine
 WORKDIR '/usr/share/nginx/html'
 
 COPY --from=builder '/usr/app/build/' './'
+
+# Normally this doesn't do anything. This is a custom instruction for EBS
+EXPOSE 80
